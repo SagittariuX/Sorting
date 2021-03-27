@@ -4,7 +4,7 @@ import SortingGround from "./components/SortingGround";
 function App() {
   return (
     <div className="App">
-      <SortingGround />
+      <SortingGround amount={10} />
     </div>
   );
 }

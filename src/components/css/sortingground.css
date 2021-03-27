@@ -12,6 +12,18 @@
     background-color: gray;
 }
 
+.watching{
+    background-color: green;
+}
+
+.comparing{
+    background-color: orange;
+}
+
+.swapping{
+    background-color: red;
+}
+
 .sorting-ground-controller-wrapper{
     display: flex;
     align-items: center;

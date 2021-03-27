@@ -1,21 +1,8 @@
-import React from "react";
+import React , {useState}from "react";
 
 import "./css/sortingground.css";
 
 import SortingController from './SortingController';
-
-//Generates random integer from 1 - max
-const getRandomInt = (max) => {
-  return 1 + Math.floor(Math.random() * Math.floor(max - 1));
-};
-
-const generateBars = (num) => {
-  let list = [];
-  for (let i = 0; i < num; i++)
-    list.push(<Bars height={getRandomInt(100)} num={num} />);
-
-  return list;
-};
 
 const Bars = ({ height, num }) => {
   return (
@@ -30,16 +17,18 @@ const Bars = ({ height, num }) => {
   );
 };
 
-const SortingGround = ({ numBars }) => {
+const SortingGround = () => {
+  const [record, setRecord] = useState(null);
+  
   return (
 		<>
     <div className="sorting-ground container-fluid">
       <div className="sorting-ground-row row">
-        {generateBars(50).map((bar) => bar)}
+        {record && record.currentList.map((l, i, list) => <Bars key={i} height={l} num={list.length} />)}
       </div>
     </div>
 		<div className='sorting-ground-controller-wrapper container'>
-			<SortingController />
+			<SortingController setRecord={setRecord} />
 		</div>
 		</>
   );
