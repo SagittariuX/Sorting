@@ -1,0 +1,21 @@
+.sorting-ground{
+    height: 50vh;
+}
+.sorting-ground-row{
+    height: 100%;
+    align-items: flex-end;
+    /* flex-wrap: nowrap; */
+}
+
+.my-bar{
+    flex-grow: 1;
+    background-color: gray;
+}
+
+.sorting-ground-controller-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 10px;
+}
