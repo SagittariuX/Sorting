@@ -2,12 +2,17 @@ import React, { useEffect, useState, useRef } from "react";
 import "./css/sortingcontroller.css";
 
 import BubbleSort from "../algo/BubbleSort";
-import SelectionSort from '../algo/SelectionSort';
+import SelectionSort from "../algo/SelectionSort";
+import MergeSort from '../algo/MergeSort';
+
+import SortingOptions from "./SortingOptions";
 
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
 import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
+import ReplayIcon from "@material-ui/icons/Replay";
+// import FastForwardIcon from "@material-ui/icons/FastForward";
 
 //Generates random integer from 1 - max
 const getRandomInt = (max) => {
@@ -23,21 +28,25 @@ const generateList = (num) => {
 
 const SortAlgo = {
   "Bubble Sort": BubbleSort,
-  'Selection Sort': SelectionSort,
+  "Selection Sort": SelectionSort,
+  'Merge Sort' : MergeSort,
 };
 
 const SortingController = ({ setRecord }) => {
-  const [algo, setAlgo] = useState("Selection Sort"); //Keeps track of which algorithm is selected
+  const [algo, setAlgo] = useState("Bubble Sort"); //Keeps track of which algorithm is selected
   const [recordList, setRecordList] = useState([]); //Keeps track of all the steps in the sort
   const [recordTrack, setRecordTrack] = useState(0); //Keeps track of which the current index of recordList
   const [isPaused, setIsPaused] = useState(true); // Keeps track if replay is happening
 
-  const intervalSpeed = useRef(1000);
+  const intervalSpeed = useRef(200);
 
   //Run BubbleSort on start up
+  //Also resets all values when triggered
   useEffect(() => {
     const sort = SortAlgo[algo];
     setRecordList(sort(generateList(10)));
+    setRecordTrack(0);
+    setIsPaused(true);
   }, [algo]);
 
   //Feed initial state to SortingGround
@@ -61,25 +70,39 @@ const SortingController = ({ setRecord }) => {
 
   return (
     <>
-      <div className="row">
+      <div className="row control-panel-row">
         <div className="sorting-ground-controller-player">
-          <SkipPreviousIcon onClick={() => {
-            setIsPaused(true)
-            setRecordTrack(recordTrack > 0 ? recordTrack - 1 : recordTrack)
-          }}/>
+          <ReplayIcon
+            onClick={() => {
+              setRecordTrack(0);
+              setIsPaused(true);
+            }}
+          />
+          <SkipPreviousIcon
+            onClick={() => {
+              setIsPaused(true);
+              setRecordTrack(recordTrack > 0 ? recordTrack - 1 : recordTrack);
+            }}
+          />
           {isPaused ? (
             <PlayCircleFilledIcon onClick={() => setIsPaused(!isPaused)} />
           ) : (
             <PauseCircleFilledIcon onClick={() => setIsPaused(!isPaused)} />
           )}
-          <SkipNextIcon onClick={() => {
-            setIsPaused(true)
-            setRecordTrack(recordTrack < recordList.length-1 ? recordTrack + 1 : recordTrack)
-          }}/>
+          <SkipNextIcon
+            onClick={() => {
+              setIsPaused(true);
+              setRecordTrack(
+                recordTrack < recordList.length - 1
+                  ? recordTrack + 1
+                  : recordTrack
+              );
+            }}
+          />
         </div>
       </div>
-      <div className='row'>
-        2nd row
+      <div className="row control-panel-row">
+        <SortingOptions setAlgo={setAlgo} />
       </div>
     </>
   );

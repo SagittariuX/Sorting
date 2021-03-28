@@ -52,7 +52,8 @@ const SortingGround = () => {
         </div>
       </div>
       <div className="sorting-ground-controller-wrapper container">
-        <SortingController setRecord={setRecord} />
+        
+        <SortingController setRecord={setRecord}/>
       </div>
     </>
   );
