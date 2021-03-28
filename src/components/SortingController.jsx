@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import "./css/sortingcontroller.css";
 
 import BubbleSort from "../algo/BubbleSort";
+import SelectionSort from '../algo/SelectionSort';
 
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
@@ -22,15 +23,16 @@ const generateList = (num) => {
 
 const SortAlgo = {
   "Bubble Sort": BubbleSort,
+  'Selection Sort': SelectionSort,
 };
 
 const SortingController = ({ setRecord }) => {
-  const [algo, setAlgo] = useState("Bubble Sort"); //Keeps track of which algorithm is selected
+  const [algo, setAlgo] = useState("Selection Sort"); //Keeps track of which algorithm is selected
   const [recordList, setRecordList] = useState([]); //Keeps track of all the steps in the sort
   const [recordTrack, setRecordTrack] = useState(0); //Keeps track of which the current index of recordList
   const [isPaused, setIsPaused] = useState(true); // Keeps track if replay is happening
 
-  const intervalSpeed = useRef(100);
+  const intervalSpeed = useRef(1000);
 
   //Run BubbleSort on start up
   useEffect(() => {
@@ -75,6 +77,9 @@ const SortingController = ({ setRecord }) => {
             setRecordTrack(recordTrack < recordList.length-1 ? recordTrack + 1 : recordTrack)
           }}/>
         </div>
+      </div>
+      <div className='row'>
+        2nd row
       </div>
     </>
   );
