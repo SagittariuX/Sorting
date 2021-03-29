@@ -35,7 +35,7 @@ const BubbleSortText = () => {
         <p1>
           A sorting algorithm that repeatedly steps through the list, compares
           adjacent elements and swaps them if they are in the wrong order. This
-          operation is repeated until all elements are sorted.
+          operation is repeated until all elements are sorted.{" "}
           <a
             rel="noreferrer"
             target="_blank"
