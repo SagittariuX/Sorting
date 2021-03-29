@@ -1,6 +1,7 @@
 import { RecordList, addRecord, Record } from "../algo/Record";
 
-const MergeSort = (list) => {
+const MergeSort = (mylist) => {
+  let list = [...mylist];
   let records = RecordList(list);
   Sort(list, records, 0, list.length - 1);
   addRecord(records, Record(list, [], [], []));
@@ -9,11 +10,10 @@ const MergeSort = (list) => {
 
 const Sort = (list, records, l, r) => {
   if (l >= r) return;
-  const m = Math.floor((l + r)/ 2);
-  console.log(l + ' '  +r)
-   Sort(list, records, l, m);
-  Sort(list, records, m+1, r);
-  Merge(list, records, l,m, r);
+  const m = Math.floor((l + r) / 2);
+  Sort(list, records, l, m);
+  Sort(list, records, m + 1, r);
+  Merge(list, records, l, m, r);
 };
 
 const Merge = (list, records, l, m, r) => {
@@ -35,7 +35,6 @@ const Merge = (list, records, l, m, r) => {
   let j = 0;
 
   let start = l;
-
 
   while (i < len1 && j < len2) {
     addRecord(records, Record(list, [l + i, m + 1 + j], [], []));

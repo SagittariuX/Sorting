@@ -3,7 +3,7 @@ import "./css/sortingcontroller.css";
 
 import BubbleSort from "../algo/BubbleSort";
 import SelectionSort from "../algo/SelectionSort";
-import MergeSort from '../algo/MergeSort';
+import MergeSort from "../algo/MergeSort";
 
 import SortingOptions from "./SortingOptions";
 
@@ -29,29 +29,32 @@ const generateList = (num) => {
 const SortAlgo = {
   "Bubble Sort": BubbleSort,
   "Selection Sort": SelectionSort,
-  'Merge Sort' : MergeSort,
+  "Merge Sort": MergeSort,
 };
 
 const SortingController = ({ setRecord }) => {
-  const [algo, setAlgo] = useState("Bubble Sort"); //Keeps track of which algorithm is selected
+
+  const intervalSpeed = useRef(200);
+  const setIntervalSpeed = (speed) => (intervalSpeed.current = speed);
+
+  const [algoRef, setAlgoRef] = useState("Bubble Sort"); //Keeps track of which algorithm is selected
+  // ^ a reference to the algorithms stored in ../algo
   const [recordList, setRecordList] = useState([]); //Keeps track of all the steps in the sort
   const [recordTrack, setRecordTrack] = useState(0); //Keeps track of which the current index of recordList
   const [isPaused, setIsPaused] = useState(true); // Keeps track if replay is happening
-
-  const intervalSpeed = useRef(200);
+  const [driverList, setDriverList] = useState(generateList(10));
 
   //Run BubbleSort on start up
   //Also resets all values when triggered
   useEffect(() => {
-    const sort = SortAlgo[algo];
-    setRecordList(sort(generateList(10)));
+    const sort = SortAlgo[algoRef];
+    setRecordList(sort(driverList));
     setRecordTrack(0);
     setIsPaused(true);
-  }, [algo]);
+  }, [algoRef, driverList]);
 
-  //Feed initial state to SortingGround
+  //Feeds current record to SortingGround
   useEffect(() => {
-    console.log("update");
     setRecord(recordList[recordTrack]);
   }, [recordList, recordTrack, setRecord]);
 
@@ -67,6 +70,8 @@ const SortingController = ({ setRecord }) => {
     }, intervalSpeed.current);
     return () => clearInterval(interval);
   }, [isPaused, recordTrack, recordList]);
+
+  const setAmount = (amount) => (setDriverList(generateList(amount)));
 
   return (
     <>
@@ -102,7 +107,7 @@ const SortingController = ({ setRecord }) => {
         </div>
       </div>
       <div className="row control-panel-row">
-        <SortingOptions setAlgo={setAlgo} />
+        <SortingOptions setAlgoRef={setAlgoRef} setIntervalSpeed={setIntervalSpeed} setAmount={setAmount}/>
       </div>
     </>
   );

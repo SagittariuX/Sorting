@@ -9,3 +9,14 @@
 .control-panel-row{
     margin: 15px 0;
 }
+
+.btn-group-vertical{
+    align-items: stretch !important;
+}
+.options-button{
+    margin: 10px 0;
+}
+
+.options-button > button{
+    width: 100%;
+}

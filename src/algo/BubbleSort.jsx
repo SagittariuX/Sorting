@@ -1,7 +1,9 @@
 import { RecordList, addRecord, Record } from "../algo/Record";
 
-const BubbleSort = (list) => {
+const BubbleSort = (mylist) => {
+  let list = [...mylist];
   const n = list.length;
+  
   let records = RecordList(list);
   for (let i = 0; i < n - 1; i++) {
     for (let j = 0; j < n - i - 1; j++) {

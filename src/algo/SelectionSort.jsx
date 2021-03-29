@@ -1,7 +1,7 @@
 import { RecordList, addRecord, Record } from "../algo/Record";
 
-const SelectionSort = (list) => {
-    
+const SelectionSort = (mylist) => {
+    let list = [...mylist]
     let records = RecordList(list);
     
     for(let i = 0; i < list.length-1; i++){
