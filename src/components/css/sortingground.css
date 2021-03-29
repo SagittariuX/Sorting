@@ -3,8 +3,10 @@
 }
 .sorting-ground-row{
     height: 100%;
+    width: 100%;
     align-items: flex-end;
-    /* flex-wrap: nowrap; */
+    flex-wrap: nowrap;
+    margin-left: 0 !important;
 }
 
 .my-bar{
