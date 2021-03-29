@@ -4,6 +4,7 @@ import "./css/sortingcontroller.css";
 import BubbleSort, { BubbleSortText } from "../algo/BubbleSort";
 import SelectionSort, {SelectionSortText} from "../algo/SelectionSort";
 import MergeSort, {MergeSortText} from "../algo/MergeSort";
+import QuickSort, {QuickSortText} from "../algo/QuickSort";
 
 import SortingOptions from "./SortingOptions";
 
@@ -12,6 +13,7 @@ import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
 import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
 import ReplayIcon from "@material-ui/icons/Replay";
+
 // import FastForwardIcon from "@material-ui/icons/FastForward";
 
 //Generates random integer from 1 - max
@@ -30,12 +32,14 @@ const SortAlgo = {
   "Bubble Sort": BubbleSort,
   "Selection Sort": SelectionSort,
   "Merge Sort": MergeSort,
+  'Quick Sort': QuickSort,
 };
 
 const TextAlgo = {
   "Bubble Sort": <BubbleSortText />,
   "Selection Sort": <SelectionSortText />,
   'Merge Sort': <MergeSortText />,
+  'Quick Sort': <QuickSortText />,
 };
 
 const SortingController = ({ setRecord }) => {

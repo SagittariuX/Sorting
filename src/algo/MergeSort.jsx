@@ -77,7 +77,8 @@ const MergeSortText = () => {
         <p1>
           A divide and conquer algorithm. It divides the input array into two
           halves, calls itself for the two halves, and then merges the two
-          sorted halves. A dedicated merge function will be used to merge the halves. 
+          sorted halves. A dedicated merge function will be used to merge the
+          halves.{" "}
           <a
             rel="noreferrer"
             target="_blank"

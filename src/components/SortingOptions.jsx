@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button ,ButtonGroup, Dropdown, DropdownButton } from "react-bootstrap";
 
-const algorithmOptions = ["Bubble Sort", "Selection Sort", "Merge Sort"];
+const algorithmOptions = ["Bubble Sort", "Selection Sort", "Merge Sort", 'Quick Sort'];
 
 const amountOptions = [10, 25, 50, 100];
 
