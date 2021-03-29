@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./css/sortingcontroller.css";
 
-import BubbleSort from "../algo/BubbleSort";
-import SelectionSort from "../algo/SelectionSort";
-import MergeSort from "../algo/MergeSort";
+import BubbleSort, { BubbleSortText } from "../algo/BubbleSort";
+import SelectionSort, {SelectionSortText} from "../algo/SelectionSort";
+import MergeSort, {MergeSortText} from "../algo/MergeSort";
 
 import SortingOptions from "./SortingOptions";
 
@@ -32,9 +32,14 @@ const SortAlgo = {
   "Merge Sort": MergeSort,
 };
 
-const SortingController = ({ setRecord }) => {
+const TextAlgo = {
+  "Bubble Sort": <BubbleSortText />,
+  "Selection Sort": <SelectionSortText />,
+  'Merge Sort': <MergeSortText />,
+};
 
-  const intervalSpeed = useRef(200);
+const SortingController = ({ setRecord }) => {
+  const intervalSpeed = useRef(1000);
   const setIntervalSpeed = (speed) => (intervalSpeed.current = speed);
 
   const [algoRef, setAlgoRef] = useState("Bubble Sort"); //Keeps track of which algorithm is selected
@@ -58,6 +63,7 @@ const SortingController = ({ setRecord }) => {
     setRecord(recordList[recordTrack]);
   }, [recordList, recordTrack, setRecord]);
 
+  //Setup interval for playing
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
@@ -71,7 +77,7 @@ const SortingController = ({ setRecord }) => {
     return () => clearInterval(interval);
   }, [isPaused, recordTrack, recordList]);
 
-  const setAmount = (amount) => (setDriverList(generateList(amount)));
+  const setAmount = (amount) => setDriverList(generateList(amount));
 
   return (
     <>
@@ -107,7 +113,16 @@ const SortingController = ({ setRecord }) => {
         </div>
       </div>
       <div className="row control-panel-row">
-        <SortingOptions setAlgoRef={setAlgoRef} setIntervalSpeed={setIntervalSpeed} setAmount={setAmount}/>
+        <div className="options-description">
+          <div className="options-description-split">
+            <SortingOptions
+              setAlgoRef={setAlgoRef}
+              setIntervalSpeed={setIntervalSpeed}
+              setAmount={setAmount}
+            />
+          </div>
+          <div className="options-description-split description">{TextAlgo[algoRef]}</div>
+        </div>
       </div>
     </>
   );

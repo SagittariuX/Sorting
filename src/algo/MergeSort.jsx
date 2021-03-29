@@ -66,3 +66,29 @@ const Merge = (list, records, l, m, r) => {
 };
 
 export default MergeSort;
+
+const MergeSortText = () => {
+  return (
+    <>
+      <div>
+        <h1>Merge Sort</h1>
+      </div>
+      <div>
+        <p1>
+          A divide and conquer algorithm. It divides the input array into two
+          halves, calls itself for the two halves, and then merges the two
+          sorted halves. A dedicated merge function will be used to merge the halves. 
+          <a
+            rel="noreferrer"
+            target="_blank"
+            href="https://www.geeksforgeeks.org/merge-sort/"
+          >
+            Learn More
+          </a>
+        </p1>
+      </div>
+    </>
+  );
+};
+
+export { MergeSortText };
